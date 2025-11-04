@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Finanças - Mário</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+        }
+        .hide {
+            display: none !important;
+        }
+    </style>
+</head>
+<body class="bg-black min-h-screen">
+
+    <!-- Tela Inicial -->
+    <div id="home-screen" class="pb-24">
+        <!-- Título -->
+        <header class="flex items-center justify-between p-4 sm:p-6">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 rounded-full bg-slate-600 flex items-center justify-center text-white font-semibold">
+                    M
+                </div>
+                <div>
+                    <h1 class="text-white font-medium text-sm sm:text-base">Olá, Mário</h1>
+                    <p class="text-slate-400 text-xs sm:text-sm">Meu saldo</p>
+                </div>
+            </div>
+            <button class="px-4 py-2 bg-slate-800 hover:bg-slate-700 text-white text-sm rounded-lg transition-colors">
+                Sair
+            </button>
+        </header>
+
+        <!-- Cartão -->
+        <div class="space-y-6 mb-6">
+            <div class="bg-gradient-to-br from-slate-800 to-slate-900 rounded-2xl p-6 sm:p-8 mx-4 sm:mx-6">
+                <p class="text-slate-400 text-xs sm:text-sm mb-2">Despesas planejadas</p>
+                <h2 class="text-white text-3xl sm:text-4xl lg:text-5xl font-bold mb-6">
+                    R$ 1.345,23
+                </h2>
+                <div class="flex flex-wrap gap-3">
+                    <button class="bg-red-500 hover:bg-red-600 text-white px-5 py-2.5 rounded-full text-sm font-medium transition-colors">
+                        Aluguel R$ 845
+                    </button>
+                    <button class="bg-pink-500 hover:bg-pink-600 text-white px-5 py-2.5 rounded-full text-sm font-medium transition-colors">
+                        Contas R$ 845
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Renda -->
+        <div class="px-4 sm:px-6 space-y-6">
+            <section>
+                <h2 class="text-white text-lg font-semibold mb-4">Minha renda</h2>
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                    <div class="bg-slate-800 rounded-xl p-5 hover:bg-slate-750 transition-colors">
+                        <p class="text-slate-400 text-xs sm:text-sm mb-2">Salário</p>
+                        <p class="text-white text-xl sm:text-2xl font-semibold">R$ 3.000</p>
+                    </div>
+                    <div class="bg-slate-800 rounded-xl p-5 hover:bg-slate-750 transition-colors">
+                        <p class="text-slate-400 text-xs sm:text-sm mb-2">Hora extra</p>
+                        <p class="text-white text-xl sm:text-2xl font-semibold">R$ 149</p>
+                    </div>
+                    <div class="bg-slate-800 rounded-xl p-5 hover:bg-slate-750 transition-colors">
+                        <p class="text-slate-400 text-xs sm:text-sm mb-2">Investimentos</p>
+                        <p class="text-white text-xl sm:text-2xl font-semibold">R$ 3.000</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Despesas -->
+            <section>
+                <h2 class="text-white text-lg font-semibold mb-4">Meus gastos</h2>
+                <div class="space-y-3">
+                    <div class="bg-slate-800 rounded-xl p-5 flex items-center justify-between hover:bg-slate-750 transition-colors">
+                        <div class="flex items-center gap-4">
+                            <div class="w-12 h-12 bg-slate-700 rounded-lg flex items-center justify-center text-2xl">
+                                🎵
+                            </div>
+                            <div>
+                                <h3 class="text-white font-medium text-sm sm:text-base">Spotify</h3>
+                                <p class="text-slate-400 text-xs sm:text-sm">15 ABR 2025</p>
+                            </div>
+                        </div>
+                        <p class="text-white font-semibold text-base sm:text-lg">R$ 20</p>
+                    </div>
+
+                    <div class="bg-slate-800 rounded-xl p-5 flex items-center justify-between hover:bg-slate-750 transition-colors">
+                        <div class="flex items-center gap-4">
+                            <div class="w-12 h-12 bg-slate-700 rounded-lg flex items-center justify-center text-2xl">
+                                📺
+                            </div>
+                            <div>
+                                <h3 class="text-white font-medium text-sm sm:text-base">Netflix</h3>
+                                <p class="text-slate-400 text-xs sm:text-sm">14 ABR 2025</p>
+                            </div>
+                        </div>
+                        <p class="text-white font-semibold text-base sm:text-lg">R$ 45</p>
+                    </div>
+
+                    <div class="bg-slate-800 rounded-xl p-5 flex items-center justify-between hover:bg-slate-750 transition-colors">
+                        <div class="flex items-center gap-4">
+                            <div class="w-12 h-12 bg-slate-700 rounded-lg flex items-center justify-center text-2xl">
+                                🚗
+                            </div>
+                            <div>
+                                <h3 class="text-white font-medium text-sm sm:text-base">Uber</h3>
+                                <p class="text-slate-400 text-xs sm:text-sm">13 ABR 2025</p>
+                            </div>
+                        </div>
+                        <p class="text-white font-semibold text-base sm:text-lg">R$ 33</p>
+                    </div>
+
+                    <div class="bg-slate-800 rounded-xl p-5 flex items-center justify-between hover:bg-slate-750 transition-colors">
+                        <div class="flex items-center gap-4">
+                            <div class="w-12 h-12 bg-slate-700 rounded-lg flex items-center justify-center text-2xl">
+                                🍔
+                            </div>
+                            <div>
+                                <h3 class="text-white font-medium text-sm sm:text-base">iFood</h3>
+                                <p class="text-slate-400 text-xs sm:text-sm">12 ABR 2025</p>
+                            </div>
+                        </div>
+                        <p class="text-white font-semibold text-base sm:text-lg">R$ 68</p>
+                    </div>
+
+                    <div class="bg-slate-800 rounded-xl p-5 flex items-center justify-between hover:bg-slate-750 transition-colors">
+                        <div class="flex items-center gap-4">
+                            <div class="w-12 h-12 bg-slate-700 rounded-lg flex items-center justify-center text-2xl">
+                                📦
+                            </div>
+                            <div>
+                                <h3 class="text-white font-medium text-sm sm:text-base">Amazon</h3>
+                                <p class="text-slate-400 text-xs sm:text-sm">11 ABR 2025</p>
+                            </div>
+                        </div>
+                        <p class="text-white font-semibold text-base sm:text-lg">R$ 157</p>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+
+    <!-- Tela de Cartões -->
+    <div id="cards-screen" class="hide pb-24">
+        <!-- Títulos -->
+        <header class="flex items-center justify-between p-4 sm:p-6">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 rounded-full bg-slate-600 flex items-center justify-center text-white font-semibold">
+                    M
+                </div>
+                <div>
+                    <h1 class="text-white font-medium text-sm sm:text-base">Olá, Mário</h1>
+                    <p class="text-slate-400 text-xs sm:text-sm">Meus cartões</p>
+                </div>
+            </div>
+            <button class="px-4 py-2 bg-slate-800 hover:bg-slate-700 text-white text-sm rounded-lg transition-colors">
+                Sair
+            </button>
+        </header>
+
+        <!-- Cartão -->
+        <div class="space-y-6 mb-6">
+            <div class="bg-gradient-to-br from-slate-800 to-slate-900 rounded-2xl p-6 sm:p-8 mx-4 sm:mx-6">
+                <p class="text-slate-400 text-xs sm:text-sm mb-2">Limite disponível</p>
+                <h2 class="text-white text-3xl sm:text-4xl lg:text-5xl font-bold mb-6">
+                    R$ 5.000
+                </h2>
+                <div class="flex flex-wrap gap-3">
+                    <button class="bg-emerald-500 hover:bg-emerald-600 text-white px-5 py-2.5 rounded-full text-sm font-medium transition-colors">
+                        Limite total R$ 5.000
+                    </button>
+                    <button class="bg-pink-500 hover:bg-pink-600 text-white px-5 py-2.5 rounded-full text-sm font-medium transition-colors">
+                        Fatura R$ 0
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Seção cartão -->
+        <div class="px-4 sm:px-6 space-y-6">
+            <section>
+                <h2 class="text-white text-lg font-semibold mb-4">Meus cartões</h2>
+                <div class="space-y-4">
+                    <div class="bg-slate-800 rounded-xl p-5 flex items-center justify-between hover:bg-slate-750 transition-colors">
+                        <div class="flex items-center gap-4">
+                            <div class="w-12 h-12 bg-slate-700 rounded-lg flex items-center justify-center">
+                                <svg class="w-6 h-6 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <rect x="2" y="5" width="20" height="14" rx="2" stroke-width="2"/>
+                                    <line x1="2" y1="10" x2="22" y2="10" stroke-width="2"/>
+                                </svg>
+                            </div>
+                            <div>
+                                <h3 class="text-white font-medium text-sm sm:text-base">Cartão de Crédito</h3>
+                                <p class="text-slate-400 text-xs sm:text-sm">**** 4829</p>
+                                <p class="text-slate-500 text-xs mt-1 flex items-center gap-1">
+                                    <span>📅</span> Vencimento 15 de cada mês
+                                </p>
+                            </div>
+                        </div>
+                        <div class="text-right">
+                            <p class="text-slate-400 text-xs mb-1">Fatura atual</p>
+                            <p class="text-white font-semibold text-lg sm:text-xl">R$ 0</p>
+                        </div>
+                    </div>
+
+                    <div class="bg-slate-800 rounded-xl p-5 flex items-center justify-between hover:bg-slate-750 transition-colors">
+                        <div class="flex items-center gap-4">
+                            <div class="w-12 h-12 bg-slate-700 rounded-lg flex items-center justify-center">
+                                <svg class="w-6 h-6 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <rect x="2" y="5" width="20" height="14" rx="2" stroke-width="2"/>
+                                    <line x1="2" y1="10" x2="22" y2="10" stroke-width="2"/>
+                                </svg>
+                            </div>
+                            <div>
+                                <h3 class="text-white font-medium text-sm sm:text-base">Cartão de Débito</h3>
+                                <p class="text-slate-400 text-xs sm:text-sm">**** 7392</p>
+                                <p class="text-slate-500 text-xs mt-1 flex items-center gap-1">
+                                    <span>⚡</span> Saldo disponível
+                                </p>
+                            </div>
+                        </div>
+                        <div class="text-right">
+                            <p class="text-slate-400 text-xs mb-1">Saldo</p>
+                            <p class="text-white font-semibold text-lg sm:text-xl">R$ 3.149</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div class="bg-slate-800 rounded-xl p-5 hover:bg-slate-750 transition-colors">
+                    <p class="text-slate-400 text-xs sm:text-sm mb-2">Próximo vencimento</p>
+                    <p class="text-white text-xl sm:text-2xl font-semibold">15 ABR</p>
+                </div>
+                <div class="bg-slate-800 rounded-xl p-5 hover:bg-slate-750 transition-colors">
+                    <p class="text-slate-400 text-xs sm:text-sm mb-2">Limite usado</p>
+                    <p class="text-white text-xl sm:text-2xl font-semibold">0%</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Beneficio  -->
+    <div id="benefits-screen" class="hide min-h-screen flex items-center justify-center pb-24">
+        <p class="text-white text-lg">Benefícios em breve</p>
+    </div>
+
+    <!-- Documentos -->
+    <div id="documents-screen" class="hide min-h-screen flex items-center justify-center pb-24">
+        <p class="text-white text-lg">Documentos em breve</p>
+    </div>
+
+    <!-- Navegação -->
+    <nav class="fixed bottom-0 left-0 right-0 bg-slate-900 border-t border-slate-800">
+        <div class="max-w-2xl mx-auto flex justify-around items-center py-4 px-4">
+            <button onclick="showScreen('home')" id="btn-home" class="flex flex-col items-center gap-1 transition-colors">
+                <div class="w-12 h-12 rounded-full flex items-center justify-center bg-yellow-500">
+                    <svg class="w-5 h-5 text-slate-900" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/>
+                    </svg>
+                </div>
+            </button>
+
+            <button onclick="showScreen('cards')" id="btn-cards" class="flex flex-col items-center gap-1 transition-colors">
+                <div class="w-12 h-12 rounded-full flex items-center justify-center bg-slate-800">
+                    <svg class="w-5 h-5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <rect x="2" y="5" width="20" height="14" rx="2" stroke-width="2"/>
+                        <line x1="2" y1="10" x2="22" y2="10" stroke-width="2"/>
+                    </svg>
+                </div>
+            </button>
+
+            <button onclick="showScreen('benefits')" id="btn-benefits" class="flex flex-col items-center gap-1 transition-colors">
+                <div class="w-12 h-12 rounded-full flex items-center justify-center bg-slate-800">
+                    <svg class="w-5 h-5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v13m0-13V6a2 2 0 112 2h-2zm0 0V5.5A2.5 2.5 0 109.5 8H12zm-7 4h14M5 12a2 2 0 110-4h14a2 2 0 110 4M5 12v7a2 2 0 002 2h10a2 2 0 002-2v-7"/>
+                    </svg>
+                </div>
+            </button>
+
+            <button onclick="showScreen('documents')" id="btn-documents" class="flex flex-col items-center gap-1 transition-colors">
+                <div class="w-12 h-12 rounded-full flex items-center justify-center bg-slate-800">
+                    <svg class="w-5 h-5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+                    </svg>
+                </div>
+            </button>
+        </div>
+    </nav>
+
+    <script>
+        function showScreen(screenName) {
+            const screens = ['home', 'cards', 'benefits', 'documents'];
+            const buttons = ['btn-home', 'btn-cards', 'btn-benefits', 'btn-documents'];
+
+            screens.forEach((screen, index) => {
+                const screenElement = document.getElementById(screen + '-screen');
+                const buttonElement = document.getElementById(buttons[index]);
+                const buttonCircle = buttonElement.querySelector('div');
+                const buttonIcon = buttonElement.querySelector('svg');
+
+                if (screen === screenName) {
+                    screenElement.classList.remove('hide');
+                    buttonCircle.classList.remove('bg-slate-800');
+                    buttonCircle.classList.add('bg-yellow-500');
+                    buttonIcon.classList.remove('text-slate-400');
+                    buttonIcon.classList.add('text-slate-900');
+                } else {
+                    screenElement.classList.add('hide');
+                    buttonCircle.classList.remove('bg-yellow-500');
+                    buttonCircle.classList.add('bg-slate-800');
+                    buttonIcon.classList.remove('text-slate-900');
+                    buttonIcon.classList.add('text-slate-400');
+                }
+            });
+        }
+    </script>
+</body>
+</html>
