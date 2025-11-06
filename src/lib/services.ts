@@ -110,21 +110,12 @@ export interface SearchTransactionParams {
   type?: number;
 }
 
+// Serviços para autenticação
 export class AuthService {
-  // Fazer login (sem token)
   static async login(email: string, password: string): Promise<ApiResponse<LoginResponse>> {
     return await apiClient.post<LoginResponse>('/login', { email, password });
   }
 
-  // Registrar novo usuário (sem token)
-  static async register(name: string, email: string, password: string): Promise<ApiResponse<LoginResponse>> {
-    return await apiClient.post<LoginResponse>('/register', { name, email, password });
-  }
-
-  // Redefinir senha (sem token)
-  static async resetPassword(email: string): Promise<ApiResponse> {
-    return await apiClient.post('/reset-password', { email });
-  }
 }
 
 // Serviços para cartões
@@ -148,27 +139,22 @@ export class CardService {
 
 // Serviços para categorias
 export class CategoryService {
-  // Buscar todas as categorias de um usuário (incluindo padrões do sistema)
   static async getAllCategoriesByUserId(userId: number): Promise<ApiResponse<Category[]>> {
     return await apiClient.get<Category[]>(`/category/all/${userId}`);
   }
 
-  // Buscar categorias filtradas por tipo para um usuário
   static async getCategoriesByTypeAndUserId(type: 0 | 1 | 2, userId: number): Promise<ApiResponse<Category[]>> {
     return await apiClient.get<Category[]>(`/category/${type}/${userId}`);
   }
 
-  // Criar uma nova categoria
   static async createCategory(categoryData: CreateCategoryRequest): Promise<ApiResponse<Category>> {
     return await apiClient.post<Category>('/category', categoryData);
   }
 
-  // Atualizar uma categoria
   static async updateCategory(id: number, categoryData: UpdateCategoryRequest): Promise<ApiResponse<Category>> {
     return await apiClient.put<Category>(`/category/${id}`, categoryData);
   }
 
-  // Deletar uma categoria
   static async deleteCategory(id: number): Promise<ApiResponse<string>> {
     return await apiClient.delete<string>(`/category/${id}`);
   }
@@ -176,33 +162,27 @@ export class CategoryService {
 
 // Transaction Service
 export class TransactionService {
-  // Obter transações por ID do usuário
   static async getTransactionsByUserId(userId: number): Promise<ApiResponse<Transaction[]>> {
       return await apiClient.get<Transaction[]>(`/transaction/${userId}`);
   }
 
-  // Buscar transações com filtros
   static async searchTransactions(params: SearchTransactionParams): Promise<ApiResponse<Transaction[]>> {
       return await apiClient.get<Transaction[]>('/transaction/search', { params });
      
   }
 
-  // Criar nova transação
   static async createTransaction(transactionData: CreateTransactionRequest): Promise<ApiResponse<Transaction>> {
       return await apiClient.post<Transaction>('/transaction', transactionData);
   }
 
-  // Atualizar transação
   static async updateTransaction(id: number, transactionData: UpdateTransactionRequest): Promise<ApiResponse<Transaction>> {
       return await apiClient.put<Transaction>(`/transaction/${id}`, transactionData);
   }
 
-  // Marcar transação como paga
   static async payTransaction(id: number): Promise<ApiResponse<Transaction>> {
       return await apiClient.patch<Transaction>(`/transaction/${id}/pay`);
   }
 
-  // Deletar transação
   static async deleteTransaction(id: number): Promise<ApiResponse<void>> {
       return await apiClient.delete<void>(`/transaction/${id}`);
   }

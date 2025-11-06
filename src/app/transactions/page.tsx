@@ -21,13 +21,11 @@ export default function TransactionsPage() {
   const [error, setError] = useState<string | null>(null);
   const { user } = useAuth();
 
-  // Estados para modais
   const [transactionToDelete, setTransactionToDelete] = useState<Transaction | null>(null);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [transactionToEdit, setTransactionToEdit] = useState<Transaction | null>(null);
   const [showEditModal, setShowEditModal] = useState(false);
 
-  // Estados para filtros
   const [filters, setFilters] = useState({
     search: '',
     categoryId: 'all',

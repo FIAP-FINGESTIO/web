@@ -10,11 +10,9 @@ interface BottomNavigationProps {
 }
 
 export function BottomNavigation({ className = '' }: BottomNavigationProps) {
-    // Todos os hooks devem ser chamados SEMPRE na mesma ordem
     const { user, isLoading } = useAuth();
     const pathname = usePathname();
     
-    // Returns condicionais só após todos os hooks
     if (isLoading) {
         return null;
     }

@@ -106,12 +106,10 @@ export default function CategoriesPage() {
     setError(errorMessage);
   };
 
-  // Filtrar categorias por tipo
   const incomeCategories = categories.filter(cat => cat.type === 0);      // Renda
   const expenseCategories = categories.filter(cat => cat.type === 1);     // Despesa
   const investmentCategories = categories.filter(cat => cat.type === 2);  // Investimento
 
-  // Separar categorias do usuário e do sistema
   const userCategories = categories.filter(cat => cat.userId === user?.id);
   const systemCategories = categories.filter(cat => cat.userId === null);
 

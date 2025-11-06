@@ -59,7 +59,6 @@ export function CreateTransactionModal({ userId, onTransactionCreated, onError }
     }
   }, [userId]);
 
-  // Carregar categorias e cartões quando abrir o modal
   useEffect(() => {
     if (open) {
       loadCategories();
