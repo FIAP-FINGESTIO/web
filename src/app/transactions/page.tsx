@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { Button } from '@/components/ui/button';
 import { ProtectedRoute } from '@/components/protected-route';
 import { useAuth } from '@/providers/auth-provider';
@@ -39,25 +39,12 @@ export default function TransactionsPage() {
 
   const [filteredTransactions, setFilteredTransactions] = useState<Transaction[]>([]);
 
-  useEffect(() => {
-    if (user) {
-      loadData();
-    }
-  }, [user]);
-
-  // Aplicar filtros quando mudarem
-  useEffect(() => {
-    applyFilters();
-  }, [transactions, filters]);
-
-  const loadData = async () => {
+  const loadData = useCallback(async () => {
     if (!user) return;
 
     try {
       setIsLoading(true);
-      setError(null);
 
-      // Carregar transações, categorias e cartões em paralelo
       const [transactionsResponse, categoriesResponse, cardsResponse] = await Promise.all([
         TransactionService.getTransactionsByUserId(user.id),
         CategoryService.getAllCategoriesByUserId(user.id),
@@ -66,8 +53,7 @@ export default function TransactionsPage() {
 
       if (transactionsResponse.success && transactionsResponse.data) {
         setTransactions(transactionsResponse.data);
-      } else {
-        setError(transactionsResponse.message || 'Erro ao carregar transações');
+        setFilteredTransactions(transactionsResponse.data);
       }
 
       if (categoriesResponse.success && categoriesResponse.data) {
@@ -77,45 +63,50 @@ export default function TransactionsPage() {
       if (cardsResponse.success && cardsResponse.data) {
         setCards(cardsResponse.data);
       }
-    } catch (error: any) {
-      setError('Erro de conexão com o servidor');
+    } catch (error) {
+      console.error('Erro ao carregar dados:', error);
     } finally {
       setIsLoading(false);
     }
-  };
+  }, [user]);
 
-  const applyFilters = () => {
-    let filtered = [...transactions];
-
-    // Filtro por busca (descrição)
-    if (filters.search) {
-      filtered = filtered.filter(t => 
-        t.description?.toLowerCase().includes(filters.search.toLowerCase())
-      );
-    }
+  const applyFilters = useCallback(() => {
+    let filtered = transactions;
 
     if (filters.categoryId && filters.categoryId !== 'all') {
       filtered = filtered.filter(t => t.categoryId === parseInt(filters.categoryId));
     }
 
-    if (filters.cardId && filters.cardId !== 'all') {
-      filtered = filtered.filter(t => t.cardId === parseInt(filters.cardId));
-    }
-
     if (filters.isPaid && filters.isPaid !== 'all') {
-      filtered = filtered.filter(t => t.isPaid === filters.isPaid);
+      filtered = filtered.filter(t => 
+        filters.isPaid === 'paid' ? t.isPaid === 'Y' : t.isPaid !== 'Y'
+      );
     }
 
     if (filters.startDate) {
-      filtered = filtered.filter(t => t.occurredAt >= filters.startDate);
+      filtered = filtered.filter(t => 
+        new Date(t.occurredAt) >= new Date(filters.startDate!)
+      );
     }
 
     if (filters.endDate) {
-      filtered = filtered.filter(t => t.occurredAt <= filters.endDate);
+      filtered = filtered.filter(t => 
+        new Date(t.occurredAt) <= new Date(filters.endDate!)
+      );
     }
 
     setFilteredTransactions(filtered);
-  };
+  }, [transactions, filters]);
+
+  useEffect(() => {
+    if (user) {
+      loadData();
+    }
+  }, [user, loadData]);
+
+  useEffect(() => {
+    applyFilters();
+  }, [transactions, filters, applyFilters]);
 
   const handlePayTransaction = async (transaction: Transaction) => {
     try {

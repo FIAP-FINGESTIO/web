@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { Plus, Receipt, Calendar } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
@@ -37,26 +37,7 @@ export function CreateTransactionModal({ userId, onTransactionCreated, onError }
     isPaid: false,
   });
 
-  // Carregar categorias e cartões quando abrir o modal
-  useEffect(() => {
-    if (open) {
-      loadCategories();
-      loadCards();
-    }
-  }, [open, userId]);
-
-  const loadCategories = async () => {
-    try {
-      const response = await CategoryService.getAllCategoriesByUserId(userId);
-      if (response.success && response.data) {
-        setCategories(response.data);
-      }
-    } catch (error) {
-      console.error('Erro ao carregar categorias:', error);
-    }
-  };
-
-  const loadCards = async () => {
+  const loadCards = useCallback(async () => {
     try {
       const response = await CardService.getCardsByUserId(userId);
       if (response.success && response.data) {
@@ -65,7 +46,26 @@ export function CreateTransactionModal({ userId, onTransactionCreated, onError }
     } catch (error) {
       console.error('Erro ao carregar cartões:', error);
     }
-  };
+  }, [userId]);
+
+  const loadCategories = useCallback(async () => {
+    try {
+      const response = await CategoryService.getAllCategoriesByUserId(userId);
+      if (response.success && response.data) {
+        setCategories(response.data);
+      }
+    } catch (error) {
+      console.error('Erro ao carregar categorias:', error);
+    }
+  }, [userId]);
+
+  // Carregar categorias e cartões quando abrir o modal
+  useEffect(() => {
+    if (open) {
+      loadCategories();
+      loadCards();
+    }
+  }, [open, loadCategories, loadCards]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();

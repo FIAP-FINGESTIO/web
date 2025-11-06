@@ -1,36 +1,138 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# 💰 Fingestio - Sistema de Gestão Financeira
 
-## Getting Started
+Um sistema moderno e intuitivo para gerenciamento de finanças pessoais, desenvolvido com Next.js 13, TypeScript e Tailwind CSS.
 
-First, run the development server:
+## 🧪 Usuário de Teste
+
+Para testar a aplicação, utilize as seguintes credenciais:
+
+```
+Email: teste@teste.com
+Senha: teste123
+```
+
+**Funcionalidades disponíveis com usuário teste:**
+- ✅ Login completo no sistema
+- ✅ Visualização do dashboard financeiro
+- ✅ Criação e gestão de transações
+- ✅ Gerenciamento de categorias personalizadas
+- ✅ Controle de cartões de crédito/débito
+- ✅ Todas as funcionalidades da aplicação
+
+## 🚀 Funcionalidades
+
+- 📊 **Dashboard Financeiro**: Visualização completa do seu saldo e transações
+- 💳 **Gestão de Cartões**: Controle de cartões de crédito e débito
+- 📂 **Categorização**: Organize suas transações por categorias personalizadas
+- 💸 **Transações**: Registro completo de receitas, despesas e investimentos
+- 📱 **Design Responsivo**: Interface otimizada para mobile e desktop
+- 🌙 **Tema Escuro**: Design moderno com paleta de cores cinza
+- 🔐 **Autenticação Segura**: Sistema de login e proteção de rotas
+
+## 🛠️ Tecnologias Utilizadas
+
+- **Frontend**: Next.js 13, React 18, TypeScript
+- **Styling**: Tailwind CSS, CSS Modules
+- **UI Components**: Radix UI, Lucide Icons
+- **HTTP Client**: Axios
+
+## 📋 Pré-requisitos
+
+Antes de começar, certifique-se de ter instalado:
+
+- [Node.js](https://nodejs.org/) (versão 18 ou superior)
+- [npm](https://www.npmjs.com/) ou [yarn](https://yarnpkg.com/)
+- [Git](https://git-scm.com/)
+
+## ⚡ Instalação e Configuração
+
+### 1. Clone o repositório
+
+```bash
+git clone https://github.com/FIAP-FINGESTIO/fingestio-web.git
+cd fingestio-web
+```
+
+### 2. Instale as dependências
+
+```bash
+npm install
+# ou
+yarn install
+```
+
+### 3. Configure as variáveis de ambiente
+
+Crie um arquivo `.env.local` na raiz do projeto:
+
+```env
+# API Configuration
+NEXT_PUBLIC_API_URL=http://localhost:8080/api
+```
+
+### 4. Execute a aplicação
 
 ```bash
 npm run dev
-# or
+# ou
 yarn dev
-# or
-pnpm dev
-# or
-bun run dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+A aplicação estará disponível em [http://localhost:3000](http://localhost:3000)
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 🏗️ Scripts Disponíveis
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+```bash
+# Desenvolvimento
+npm run dev          # Inicia o servidor de desenvolvimento
 
-## Learn More
+# Produção
+npm run build        # Gera build de produção
+npm run start        # Inicia servidor de produção
 
-To learn more about Next.js, take a look at the following resources:
+# Qualidade de código
+npm run lint         # Executa ESLint
+npm run typecheck    # Verifica tipos TypeScript
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 📁 Estrutura do Projeto
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+```
+fingestio-web/
+├── public/                 # Arquivos estáticos
+│   └── logo.svg           # Logo da aplicação
+├── src/
+│   ├── app/               # App Router do Next.js 13
+│   │   ├── login/         # Página de login
+│   │   ├── transactions/  # Página de transações
+│   │   ├── categories/    # Página de categorias
+│   │   └── cards/         # Página de cartões
+│   ├── components/        # Componentes reutilizáveis
+│   │   ├── ui/           # Componentes de UI base
+│   │   ├── transactions/ # Componentes de transações
+│   │   ├── categories/   # Componentes de categorias
+│   │   └── cards/        # Componentes de cartões
+│   ├── hooks/            # Custom hooks
+│   ├── lib/              # Utilitários e serviços
+│   └── providers/        # Context providers
+├── package.json
+└── README.md
+```
 
-## Deploy on Vercel
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## 🎨 Personalização
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+### Componentes UI
+
+Os componentes estão na pasta `src/components/ui/` e são baseados no Radix UI com Tailwind CSS.
+
+## 📱 Funcionalidades Mobile
+
+- Layout responsivo otimizado para mobile
+- Bottom navigation para fácil acesso
+- Modals com scroll para telas pequenas
+- Touch-friendly interface
+
+## 📄 Licença
+
+Este projeto está sob a licença MIT. Veja o arquivo [LICENSE](LICENSE) para mais detalhes.

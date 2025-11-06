@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { Grid3x3, Edit, Trash2, MoreVertical, TrendingUp, TrendingDown, PiggyBank } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
@@ -52,20 +52,11 @@ export default function CategoriesPage() {
     }
   };
 
-  // Carregar categorias
-  useEffect(() => {
-    if (user) {
-      loadCategories();
-    }
-  }, [user]);
-
-  const loadCategories = async () => {
+  const loadCategories = useCallback(async () => {
     if (!user) return;
-    
+
     try {
       setIsLoading(true);
-      setError(null);
-      
       const response = await CategoryService.getAllCategoriesByUserId(user.id);
       
       if (response.success && response.data) {
@@ -74,11 +65,18 @@ export default function CategoriesPage() {
         setError(response.message || 'Erro ao carregar categorias');
       }
     } catch (error: any) {
-      setError('Erro de conexão');
+      setError('Erro de conexão com o servidor');
+      console.error('Erro ao carregar categorias:', error);
     } finally {
       setIsLoading(false);
     }
-  };
+  }, [user]);
+
+  useEffect(() => {
+    if (user) {
+      loadCategories();
+    }
+  }, [user, loadCategories]);
 
   const handleEditCategory = (category: Category) => {
     setCategoryToEdit(category);
