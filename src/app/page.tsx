@@ -46,7 +46,6 @@ export default function HomePage() {
     }
   }, [user, loadData]);
 
-  // Calcular valores considerando apenas transações PAGAS
   const paidTransactions = transactions.filter(t => t.isPaid === 'Y');
 
   const totalExpenses = paidTransactions
@@ -63,7 +62,6 @@ export default function HomePage() {
     })
     .reduce((sum, t) => sum + t.amount, 0);
 
-  // Investimentos pagos (para mostrar no card separado)
   const totalInvestments = paidTransactions
     .filter(t => {
       const category = categories.find(c => c.id === t.categoryId);
@@ -71,10 +69,8 @@ export default function HomePage() {
     })
     .reduce((sum, t) => sum + t.amount, 0);
 
-  // Saldo atual: Renda - Despesas - Investimentos (investimentos diminuem o dinheiro disponível)
   const balance = totalIncome - totalExpenses - totalInvestments;
 
-  // Pegar as últimas transações (gastos)
   const recentExpenses = transactions
     .filter(t => {
       const category = categories.find(c => c.id === t.categoryId);
