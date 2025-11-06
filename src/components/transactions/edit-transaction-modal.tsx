@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { Edit, Receipt } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
@@ -10,7 +10,6 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { Switch } from '@/components/ui/switch';
 import { Textarea } from '@/components/ui/textarea';
 import { TransactionService, CategoryService, CardService, UpdateTransactionRequest, Transaction, Category, Card } from '@/lib/services';
-import { formatDateInputValue } from '@/lib/utils';
 
 interface EditTransactionModalProps {
   transaction: Transaction | null;
@@ -44,56 +43,9 @@ export function EditTransactionModal({
     isPaid: false,
   });
 
-  useEffect(() => {
-    if (transaction && open) {
-      const convertDateToInputFormat = (dateString: string) => {
-        if (!dateString) return '';
-        
-        if (dateString.includes('-') && dateString.length === 10) return dateString;
-        
-        if (dateString.includes('T')) {
-          return dateString.split('T')[0];
-        }
-        
-        if (dateString.includes('/')) {
-          const [day, month, year] = dateString.split('/');
-          return `${year}-${month.padStart(2, '0')}-${day.padStart(2, '0')}`;
-        }
-        
-        return dateString;
-      };
-
-      setFormData({
-        description: transaction.description || '',
-        categoryId: transaction.categoryId.toString(),
-        cardId: transaction.cardId ? transaction.cardId.toString() : 'none',
-        amount: transaction.amount.toString(),
-        currency: transaction.currency || 'BRL',
-        occurredAt: convertDateToInputFormat(transaction.occurredAt),
-        dueDate: convertDateToInputFormat(transaction.dueDate),
-        isRecurring: transaction.isRecurring === 'Y',
-        isPaid: transaction.isPaid === 'Y',
-      });
-
-      loadCategories();
-      loadCards();
-    }
-  }, [transaction, open]);
-
-  const loadCategories = async () => {
+  const loadCards = useCallback(async () => {
     if (!transaction) return;
-    try {
-      const response = await CategoryService.getAllCategoriesByUserId(transaction.userId);
-      if (response.success && response.data) {
-        setCategories(response.data);
-      }
-    } catch (error) {
-      console.error('Erro ao carregar categorias:', error);
-    }
-  };
-
-  const loadCards = async () => {
-    if (!transaction) return;
+    
     try {
       const response = await CardService.getCardsByUserId(transaction.userId);
       if (response.success && response.data) {
@@ -102,7 +54,67 @@ export function EditTransactionModal({
     } catch (error) {
       console.error('Erro ao carregar cartões:', error);
     }
-  };
+  }, [transaction]);
+
+  const loadCategories = useCallback(async () => {
+    if (!transaction) return;
+    
+    try {
+      const response = await CategoryService.getAllCategoriesByUserId(transaction.userId);
+      if (response.success && response.data) {
+        setCategories(response.data);
+      }
+    } catch (error) {
+      console.error('Erro ao carregar categorias:', error);
+    }
+  }, [transaction]);
+
+  useEffect(() => {
+    if (open && transaction) {
+      loadCategories();
+      loadCards();
+      
+      const formatDateForInput = (dateString: string) => {
+        if (!dateString) {
+          const now = new Date();
+          const year = now.getFullYear();
+          const month = String(now.getMonth() + 1).padStart(2, '0');
+          const day = String(now.getDate()).padStart(2, '0');
+          return `${year}-${month}-${day}`;
+        }
+
+        const parts = dateString.split('/');
+        if (parts.length === 3) {
+          const [day, month, year] = parts;
+          if (day && month && year) {
+            return `${year}-${month.padStart(2, '0')}-${day.padStart(2, '0')}`;
+          }
+        }
+
+        if (dateString.match(/^\d{4}-\d{2}-\d{2}$/)) {
+          return dateString;
+        }
+
+        const now = new Date();
+        const year = now.getFullYear();
+        const month = String(now.getMonth() + 1).padStart(2, '0');
+        const day = String(now.getDate()).padStart(2, '0');
+        return `${year}-${month}-${day}`;
+      };
+
+      setFormData({
+        description: transaction.description || '',
+        categoryId: transaction.categoryId.toString(),
+        cardId: transaction.cardId ? transaction.cardId.toString() : '',
+        amount: transaction.amount.toString(),
+        currency: transaction.currency || 'BRL',
+        occurredAt: formatDateForInput(transaction.occurredAt),
+        dueDate: formatDateForInput(transaction.dueDate || transaction.occurredAt),
+        isRecurring: transaction.isRecurring === 'Y',
+        isPaid: transaction.isPaid === 'Y',
+      });
+    }
+  }, [open, transaction, loadCategories, loadCards]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();

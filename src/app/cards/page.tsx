@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { Users, CreditCard, Trash2 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { ProtectedRoute } from '@/components/protected-route';
@@ -22,19 +22,11 @@ export default function CardsPage() {
   const [cardToDelete, setCardToDelete] = useState<CardType | null>(null);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
 
-  useEffect(() => {
-    if (user) {
-      loadCards();
-    }
-  }, [user]);
-
-  const loadCards = async () => {
+  const loadCards = useCallback(async () => {
     if (!user) return;
 
     try {
       setIsLoading(true);
-      setError(null);
-
       const response = await CardService.getCardsByUserId(user.id);
 
       if (response.success && response.data) {
@@ -48,7 +40,13 @@ export default function CardsPage() {
     } finally {
       setIsLoading(false);
     }
-  };
+  }, [user]);
+
+  useEffect(() => {
+    if (user) {
+      loadCards();
+    }
+  }, [user, loadCards]);
 
   const handleDeleteCard = (card: CardType) => {
     setCardToDelete(card);
